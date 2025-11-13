@@ -25,7 +25,18 @@ Preferred communication style: Simple, everyday language.
 
 **State Management**: TanStack Query (React Query) for server state management with custom query client configuration. Form state is managed using React Hook Form with Zod validation schemas.
 
-**Routing**: Wouter for lightweight client-side routing with a simple route structure (home page and 404 fallback).
+**Routing**: Wouter for lightweight client-side routing. Current routes:
+- `/` - Home/landing page
+- `/our-blends` - Product showcase page featuring the three core supplements
+- 404 fallback for unmatched routes
+
+**Navigation**: Shared Navigation component provides consistent header across all pages with:
+- Logo linking to home
+- Main navigation links (Home, Our Blends, About, Contact)
+- Shop Now CTA button
+- Mobile-responsive menu with hamburger toggle
+- Smooth scroll shadow effect on scroll
+- Active link highlighting
 
 **Design Philosophy**: Reference-based design inspired by wellness brands, focusing on zen aesthetics, natural imagery, and calming user experience. The design guidelines specify centered layouts, soft color harmonies without harsh contrasts, and generous white space.
 
