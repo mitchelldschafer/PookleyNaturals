@@ -83,9 +83,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
+        sans: ["'DM Sans'", "'Outfit'", "sans-serif"],
+        serif: ["'Cormorant Garamond'", "serif"],
+        mono: ["'DM Sans'", "monospace"],
       },
       keyframes: {
         "accordion-down": {
