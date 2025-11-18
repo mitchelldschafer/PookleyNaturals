@@ -2,7 +2,12 @@
 
 ## Overview
 
-Lunara Naturals is a wellness-focused landing page application for a women's plant-based supplement brand. The application features a zen, nature-inspired aesthetic with a landing page showcasing products, testimonials, and an email subscription system. Built as a full-stack TypeScript application with React frontend and Express backend, it emphasizes mobile-first responsive design with calming, natural tones inspired by brands like Aesop, Ritual, and Moon Juice.
+Lunara Naturals is a wellness-focused web application for a women's plant-based supplement brand. The application features a zen, nature-inspired aesthetic with a home page, product showcase, and ritual guide. Built as a full-stack TypeScript application with React frontend and Express backend, it emphasizes mobile-first responsive design with calming, natural tones inspired by brands like Aesop, Ritual, and Moon Juice.
+
+**Current Pages**:
+- **Home** (`/`): Landing page with hero section, about, product highlights, testimonials, email signup, and footer
+- **Our Blends** (`/our-blends`): Product showcase featuring three core supplements (Glow Ritual, Calm Restore, Vital Greens) with benefits and CTA
+- **Our Rituals** (`/our-rituals`): Daily wellness ritual guide with morning, midday, and evening practices, micro-habit tips, and integration advice
 
 ## User Preferences
 
@@ -28,11 +33,12 @@ Preferred communication style: Simple, everyday language.
 **Routing**: Wouter for lightweight client-side routing. Current routes:
 - `/` - Home/landing page
 - `/our-blends` - Product showcase page featuring the three core supplements
+- `/our-rituals` - Daily wellness ritual guide showing how to incorporate supplements into morning, midday, and evening routines
 - 404 fallback for unmatched routes
 
 **Navigation**: Shared Navigation component provides consistent header across all pages with:
 - Logo linking to home
-- Main navigation links (Home, Our Blends, About, Contact)
+- Main navigation links (Home, Our Blends, Our Rituals, About, Contact)
 - Shop Now CTA button
 - Mobile-responsive menu with hamburger toggle
 - Smooth scroll shadow effect on scroll
