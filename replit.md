@@ -8,6 +8,7 @@ Lunara Naturals is a wellness-focused web application for a women's plant-based 
 - **Home** (`/`): Landing page with hero section, about, product highlights, testimonials, email signup, and footer
 - **Our Blends** (`/our-blends`): Product showcase featuring three core supplements (Glow Ritual, Calm Restore, Vital Greens) with benefits and CTA
 - **Our Rituals** (`/our-rituals`): Daily wellness ritual guide with morning, midday, and evening practices, micro-habit tips, and integration advice
+- **Ingredients Library** (`/ingredients`): Botanical glossary featuring 8 herbs and ingredients (Ashwagandha, Chamomile, Maca Root, Rose Hip, Spirulina, Wheatgrass, Lemon Balm, Holy Basil) with category tags, safety notes, and educational descriptions
 
 ## User Preferences
 
@@ -34,11 +35,12 @@ Preferred communication style: Simple, everyday language.
 - `/` - Home/landing page
 - `/our-blends` - Product showcase page featuring the three core supplements
 - `/our-rituals` - Daily wellness ritual guide showing how to incorporate supplements into morning, midday, and evening routines
+- `/ingredients` - Ingredients library page with botanical glossary of 8 herbs and ingredients used in the blends
 - 404 fallback for unmatched routes
 
 **Navigation**: Shared Navigation component provides consistent header across all pages with:
 - Logo linking to home
-- Main navigation links (Home, Our Blends, Our Rituals, About, Contact)
+- Main navigation links (Home, Our Blends, Our Rituals, Ingredients, About, Contact)
 - Shop Now CTA button
 - Mobile-responsive menu with hamburger toggle
 - Smooth scroll shadow effect on scroll
