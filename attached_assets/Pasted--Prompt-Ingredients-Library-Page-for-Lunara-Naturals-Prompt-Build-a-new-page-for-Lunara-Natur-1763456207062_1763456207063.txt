@@ -1,0 +1,134 @@
+🌿 Prompt: “Ingredients Library” Page for Lunara Naturals
+
+Prompt:
+Build a new page for Lunara Naturals called “Ingredients Library” — a calm, elegant glossary of the herbs and botanicals used in our blends.
+
+The page should feel like a soft, modern herbal encyclopedia: spacious, readable, and rooted in nature. It should visually match the existing Lunara pages (same header, footer, fonts, and color palette: warm neutrals, sage, blush, ivory).
+
+Overall layout & vibe:
+
+Use the same nav/header and footer as the Home and Our Blends pages.
+
+Keep lots of white space, gentle section dividers, and subtle scroll animations (fade-up, low motion).
+
+Typography: elegant serif for headings, clean sans-serif for body text.
+
+Page structure:
+
+Hero Section – “The Heart of Our Blends”
+
+Headline: “The Heart of Our Blends.”
+
+Subtext: “Every Lunara formula begins with thoughtfully chosen botanicals, rooted in tradition and guided by modern wellness.”
+
+Soft background (gradient or texture) with a minimal botanical illustration or image of herbs on linen.
+
+Intro Copy Block
+
+Short paragraph explaining why ingredients matter (purity, intentionality, women’s wellness, gentle support).
+
+One highlighted sentence in italics, e.g., “When you know what’s inside, you can trust what you feel.”
+
+Ingredients Grid / Library
+
+Create a responsive grid of ingredient cards (2–3 columns on desktop, single column on mobile).
+
+For each ingredient, include:
+
+Ingredient name (e.g., “Ashwagandha”)
+
+Short subtitle / category (e.g., “Adaptogen · Calm & Stress Support”)
+
+2–3 sentence description in plain language explaining:
+
+What it is
+
+Why it’s used
+
+How it supports women’s wellness
+
+A small icon or illustration placeholder (leaf, root, flower, etc.).
+
+Example ingredients to include:
+
+Ashwagandha – adaptogen for stress, calm, resilience.
+
+Chamomile – soothing flower for rest and relaxation.
+
+Maca Root – supports energy and hormone balance.
+
+Rose Hip – vitamin C rich; supports skin and glow.
+
+Spirulina – nutrient-dense algae for energy & vitality.
+
+Wheatgrass – greens for detox and daily nourishment.
+
+Lemon Balm – calming herb for an easeful mind.
+
+Holy Basil (Tulsi) – adaptogen for clarity and calm.
+
+Each card should feel like a mini profile, not too clinical — warm, accessible language.
+
+Filter / Tag Row (Optional but nice)
+
+Add a small row of filter “chips” or tags near the top of the grid, such as:
+
+“Calm & Mood”
+
+“Energy & Vitality”
+
+“Hormone Balance”
+
+“Skin & Glow”
+
+These don’t need to be fully functional filters yet; they can just visually categorize ingredients (e.g., each card shows a small tag like “Calm & Mood”).
+
+Safety & Transparency Note
+
+Add a gentle section near the bottom with a soft background.
+
+Heading: “Gentle, Honest, Transparent.”
+
+2–3 short bullet points on:
+
+No harsh fillers
+
+Third-party testing or “crafted with intention” (can be placeholder copy)
+
+A reminder that supplements are not a substitute for professional medical advice.
+
+Call to Action – “Explore Our Blends”
+
+Final CTA band that ties the ingredients back to your products:
+
+Text: “Ready to meet the blends these ingredients call home?”
+
+Button: “Explore Our Blends” linking to the Products / Our Blends page.
+
+Copywriting style:
+
+Warm, clear, and grounded; not overly scientific.
+
+Avoid medical claims; focus on supportive language like “may support,” “traditionally used for,” “known to help with.”
+
+Use short, soothing lines where appropriate, for example:
+
+“Small leaves. Big comfort.”
+
+“Grown in the earth. Chosen for you.”
+
+Technical details:
+
+Use HTML + TailwindCSS (or clean CSS) and minimal JS for animations.
+
+Make the grid fully responsive (mobile-first).
+
+Use semantic tags like <main>, <section>, <article> for each ingredient card.
+
+Add descriptive alt text for any images/illustrations.
+
+Include basic SEO meta tags for this page:
+
+Title: “Ingredients Library | Lunara Naturals – Botanicals for Women’s Wellness”
+
+Description: “Explore the herbs and botanicals inside Lunara Naturals’ blends — thoughtfully chosen to support calm, energy, and balance.”
