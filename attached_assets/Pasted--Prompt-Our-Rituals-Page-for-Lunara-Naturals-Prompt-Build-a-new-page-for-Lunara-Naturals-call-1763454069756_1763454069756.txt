@@ -1,0 +1,116 @@
+🌿 Prompt: “Our Rituals” Page for Lunara Naturals
+
+Prompt:
+Build a new page for Lunara Naturals called “Our Rituals”.
+
+This page should feel like a calm, guided experience that shows women how to weave Lunara supplements into their daily life. Think of it as a digital ritual guide — soft, nurturing, and beautifully designed.
+
+Overall aesthetic & structure:
+
+Keep the same brand styling as the existing Lunara pages: warm neutrals, sage greens, blush accents, elegant serif headings, clean sans-serif body text.
+
+Maintain the same header/nav and footer as the other pages so the site feels unified.
+
+Use spacious sections with soft separators and gentle scroll animations (fade-in + slight upward motion).
+
+The tone should be soothing, affirming, and slightly poetic.
+
+Page layout:
+
+Hero Section – “Welcome to Your Ritual”
+
+Headline: “Welcome to Your Ritual.”
+
+Subtext: “Small, loving choices add up to a life in balance.”
+
+Background: subtle texture or soft gradient (sage → cream).
+
+Add a simple illustration or image of a calm morning scene (tea, sunlight, plants).
+
+Morning Ritual Section – “Rise & Glow”
+
+Title: “Morning Ritual · Rise & Glow”
+
+Two-column layout:
+
+Left: short paragraph describing a gentle, slow morning routine featuring Glow Ritual (e.g., “Stir one scoop into water or a warm latte, take three deep breaths, set an intention for your day.”).
+
+Right: simple step list (1–2–3) with icons for each step (drink, breathe, intention).
+
+Add a soft highlight box with an affirmation like: “Today, I choose energy that feels gentle, not rushed.”
+
+Midday Reset Section – “Breathe & Restore”
+
+Title: “Midday Ritual · Breathe & Restore”
+
+Focus on Calm Restore.
+
+Describe a quick midday pause: sip Calm Restore, walk away from screens, stretch, breathe.
+
+Use a horizontal card layout with:
+
+Short copy (“For the moments when your mind feels loud.”)
+
+A mini checklist: hydrate, breathe, unplug for 5 minutes.
+
+Evening Wind-Down Section – “Rest & Renew”
+
+Title: “Evening Ritual · Rest & Renew”
+
+Incorporate Vital Greens as part of a nourishing evening habit or gentle nightly support.
+
+Include a 3-step visual timeline (e.g., “Slow Down”, “Nourish”, “Unplug”) with simple icons and 1–2 sentences under each.
+
+Add a soft quote block: “You are allowed to rest. Your body is allowed to exhale.”
+
+Ritual Tips & Micro-Habits Section
+
+Grid of 4–6 small “ritual tips” cards, such as:
+
+“Light a candle before your supplement.”
+
+“Pair your blend with journaling.”
+
+“Leave your bottle where you’ll see it.”
+
+“Attach your ritual to something you already do (coffee, skincare, etc.).”
+
+Each card should be simple, with a small icon and 1–2 lines of text.
+
+Call to Action – “Begin Your Ritual”
+
+Soft background band in blush/sage.
+
+Headline: “Begin Your Ritual.”
+
+Subtext: “Choose the blend that meets you where you are.”
+
+Buttons:
+
+“Explore Our Blends” (links to products page)
+
+“Join Our Ritual” (links to email sign-up on home page or opens a simple form).
+
+Copywriting style:
+
+Short, gentle sentences.
+
+Focus on feelings of calm, balance, and self-trust.
+
+Example lines:
+
+“Your ritual doesn’t have to be perfect. It just has to be yours.”
+
+“One sip. One breath. One small act of care.”
+
+Technical details:
+
+Use HTML + TailwindCSS (or clean CSS) and minimal JavaScript for scroll animations.
+
+Make the page fully responsive (mobile-first).
+
+Use semantic tags (<main>, <section>, <header>, <footer>) and descriptive aria labels where helpful.
+
+Add alt text for any images or illustrations.
+
+Comment the code to explain major layout sections (hero, morning ritual, midday reset, evening, tips, CTA) so it’s easy to adjust later.
