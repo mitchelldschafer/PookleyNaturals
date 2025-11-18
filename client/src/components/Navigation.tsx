@@ -21,6 +21,7 @@ export function Navigation() {
     { href: "/", label: "Home" },
     { href: "/our-blends", label: "Our Blends" },
     { href: "/our-rituals", label: "Our Rituals" },
+    { href: "/ingredients", label: "Ingredients" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
