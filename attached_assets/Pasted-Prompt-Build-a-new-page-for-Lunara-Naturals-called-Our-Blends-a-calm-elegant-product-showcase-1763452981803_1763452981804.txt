@@ -1,0 +1,102 @@
+Prompt:
+Build a new page for Lunara Naturals called “Our Blends” — a calm, elegant, product showcase page that continues the same brand voice and design as the home page (warm neutrals, soft greens, poetic copy, and a balanced layout).
+
+Page purpose: help visitors explore the three core supplements — Glow Ritual, Calm Restore, and Vital Greens — each with photos, descriptions, and gentle calls to action.
+
+Overall feel: serene, spacious, and natural. Think of sunlight through linen curtains, earthy tones, and botanical imagery.
+
+Design structure:
+
+Header / Nav bar:
+
+Same as home page (logo, “Home,” “Our Blends,” “About,” “Contact,” “Shop Now”).
+
+Slight scroll shadow for polish.
+
+Hero section:
+
+Headline: “Discover Your Daily Ritual.”
+
+Subline: “Each blend is crafted with care to nurture balance, beauty, and calm from within.”
+
+Background: subtle texture (linen / watercolor).
+
+Product showcase (3 cards or sections):
+
+Glow Ritual:
+
+Description: “Illuminate your inner glow with adaptogenic botanicals and natural antioxidants that support healthy skin and daily energy.”
+
+Highlighted ingredient: Rose hip + Maca root.
+
+Button: “Explore Glow Ritual.”
+
+Calm Restore:
+
+Description: “Ease stress and balance your hormones with gentle herbs that support mood, rest, and inner harmony.”
+
+Highlighted ingredient: Ashwagandha + Chamomile.
+
+Button: “Explore Calm Restore.”
+
+Vital Greens:
+
+Description: “Daily nourishment from organic greens, prebiotics, and minerals for energy, clarity, and vitality.”
+
+Highlighted ingredient: Spirulina + Wheatgrass.
+
+Button: “Explore Vital Greens.”
+
+Each product should include a rounded photo (or placeholder), soft hover effect, and short poetic tagline (e.g., “Your glow begins within”).
+
+Ingredients & Benefits section:
+
+Soft background block with an infographic-style layout or icons for key benefits (Energy, Hormone Balance, Calm Mind, Radiant Skin).
+
+Include short, one-line descriptions under each icon.
+
+Call to Action section:
+
+Background gradient (sage → blush).
+
+Text: “Bring balance home.”
+
+Subtext: “Experience the difference in every blend.”
+
+Buttons: “Shop All” and “Join Our Ritual.”
+
+Footer:
+
+Same as home page, minimal and soft.
+
+Design language:
+
+Maintain same font pairing: Playfair Display (headings) + Inter (sans body).
+
+Use 3-column grid on desktop, stacked layout on mobile.
+
+Include smooth scroll animations (fade-in / slide-up) for each product section.
+
+Keep generous white space.
+
+Tech stack:
+
+HTML + Tailwind CSS (preferred).
+
+Responsive and accessible.
+
+Add alt text for product images and semantic structure for SEO.
+
+SEO metadata:
+
+Title: “Our Blends | Lunara Naturals – Plant-Based Supplements for Women’s Wellness.”
+
+Description: “Explore Lunara Naturals’ signature blends for balance, calm, and vitality — thoughtfully crafted for women’s wellness.”
+
+Keywords: women’s supplements, natural blends, adaptogens, balance, calm, vitality.
+
+Open Graph / social share:
+
+OG title: “Lunara Naturals – Discover Your Daily Ritual.”
+
+OG image: serene photo of herbs and tea on linen.
