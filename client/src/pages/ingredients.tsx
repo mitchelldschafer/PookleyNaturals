@@ -124,11 +124,11 @@ export default function Ingredients() {
       }
     };
 
-    document.title = "Ingredients Library | Lunara Naturals – Botanicals for Women's Wellness";
-    setMetaTag('description', "Explore the herbs and botanicals inside Lunara Naturals' blends — thoughtfully chosen to support calm, energy, and balance.");
+    document.title = "Ingredients Library | Pookley – Botanicals for Women's Wellness";
+    setMetaTag('description', "Explore the herbs and botanicals inside Pookley's blends — thoughtfully chosen to support calm, energy, and balance.");
     setMetaTag('keywords', 'botanical ingredients, adaptogens, herbs, ashwagandha, spirulina, natural supplements, plant-based wellness');
-    setMetaTag('og:title', 'Ingredients Library – Lunara Naturals', 'og:title');
-    setMetaTag('og:description', "Explore the herbs and botanicals inside Lunara Naturals' blends — thoughtfully chosen to support calm, energy, and balance.", 'og:description');
+    setMetaTag('og:title', 'Ingredients Library – Pookley', 'og:title');
+    setMetaTag('og:description', "Explore the herbs and botanicals inside Pookley's blends — thoughtfully chosen to support calm, energy, and balance.", 'og:description');
     setMetaTag('og:type', 'website', 'og:type');
     
     return () => {
@@ -198,7 +198,7 @@ export default function Ingredients() {
             transition={{ duration: 0.8, delay: 0.2 }}
             data-testid="text-hero-subtitle"
           >
-            Every Lunara formula begins with thoughtfully chosen botanicals, rooted in tradition and guided by modern wellness.
+            Every Pookley formula begins with thoughtfully chosen botanicals, rooted in tradition and guided by modern wellness.
           </motion.p>
         </div>
       </section>
@@ -362,7 +362,7 @@ export default function Ingredients() {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-serif text-2xl text-foreground mb-3">Lunara Naturals</h3>
+              <h3 className="font-serif text-2xl text-foreground mb-3">Pookley</h3>
               <p className="text-sm text-muted-foreground">
                 Plant-based wellness for the modern woman.
               </p>
@@ -387,13 +387,13 @@ export default function Ingredients() {
             <div>
               <h4 className="font-medium text-foreground mb-3">Connect</h4>
               <p className="text-sm text-muted-foreground">
-                hello@lunaranaturals.com
+                hello@pookley.com
               </p>
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center">
             <p className="text-sm text-muted-foreground">
-              © 2024 Lunara Naturals. All rights reserved.
+              © 2024 Pookley. All rights reserved.
             </p>
           </div>
         </div>

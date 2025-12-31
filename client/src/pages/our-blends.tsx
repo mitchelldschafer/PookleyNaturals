@@ -104,11 +104,11 @@ export default function OurBlends() {
       }
     };
 
-    document.title = "Our Blends | Lunara Naturals – Plant-Based Supplements for Women's Wellness";
-    setMetaTag('description', "Explore Lunara Naturals' signature blends for balance, calm, and vitality — thoughtfully crafted for women's wellness.");
+    document.title = "Our Blends | Pookley – Plant-Based Supplements for Women's Wellness";
+    setMetaTag('description', "Explore Pookley's signature blends for balance, calm, and vitality — thoughtfully crafted for women's wellness.");
     setMetaTag('keywords', 'women\'s supplements, natural blends, adaptogens, balance, calm, vitality');
-    setMetaTag('og:title', 'Lunara Naturals – Discover Your Daily Ritual', 'og:title');
-    setMetaTag('og:description', "Explore Lunara Naturals' signature blends for balance, calm, and vitality — thoughtfully crafted for women's wellness.", 'og:description');
+    setMetaTag('og:title', 'Pookley – Discover Your Daily Ritual', 'og:title');
+    setMetaTag('og:description', "Explore Pookley's signature blends for balance, calm, and vitality — thoughtfully crafted for women's wellness.", 'og:description');
     setMetaTag('og:type', 'website', 'og:type');
     
     return () => {
@@ -391,7 +391,7 @@ export default function OurBlends() {
                 className="font-serif text-2xl text-foreground mb-2"
                 data-testid="text-footer-brand"
               >
-                Lunara Naturals
+                Pookley
               </h3>
               <p
                 className="font-sans text-sm text-muted-foreground"

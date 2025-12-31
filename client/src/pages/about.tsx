@@ -57,10 +57,10 @@ export default function About() {
       }
     };
 
-    document.title = "About Us | Lunara Naturals – Our Story & Mission";
-    setMetaTag('description', "Meet the founder behind Lunara Naturals. A 20-year athlete's journey to plant-based wellness, longevity, and helping others thrive naturally.");
-    setMetaTag('keywords', 'about lunara naturals, founder story, wellness journey, athlete supplements, longevity, plant-based health');
-    setMetaTag('og:title', 'About Us – Lunara Naturals', 'og:title');
+    document.title = "About Us | Pookley – Our Story & Mission";
+    setMetaTag('description', "Meet the founder behind Pookley. A 20-year athlete's journey to plant-based wellness, longevity, and helping others thrive naturally.");
+    setMetaTag('keywords', 'about pookley, founder story, wellness journey, athlete supplements, longevity, plant-based health');
+    setMetaTag('og:title', 'About Us – Pookley', 'og:title');
     setMetaTag('og:description', "A 20-year athlete's journey to plant-based wellness and longevity.", 'og:description');
     setMetaTag('og:type', 'website', 'og:type');
     
@@ -164,7 +164,7 @@ export default function About() {
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <img 
                   src={founderImage} 
-                  alt="Founder of Lunara Naturals" 
+                  alt="Founder of Pookley" 
                   className="w-full h-auto object-cover"
                   data-testid="img-founder"
                 />
@@ -201,7 +201,7 @@ export default function About() {
                 </p>
                 
                 <p data-testid="text-founder-story-4">
-                  That's why I created <strong className="text-foreground">Lunara Naturals</strong>. Every blend 
+                  That's why I created <strong className="text-foreground">Pookley</strong>. Every blend 
                   is a reflection of what I wish I had discovered sooner: clean, intentional formulas designed 
                   to support your body's natural rhythms and help you thrive — today, tomorrow, and for decades to come.
                 </p>
@@ -285,7 +285,7 @@ export default function About() {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-serif text-2xl text-foreground mb-3">Lunara Naturals</h3>
+              <h3 className="font-serif text-2xl text-foreground mb-3">Pookley</h3>
               <p className="text-sm text-muted-foreground">
                 Plant-based wellness for the modern woman.
               </p>
@@ -310,13 +310,13 @@ export default function About() {
             <div>
               <h4 className="font-medium text-foreground mb-3">Connect</h4>
               <p className="text-sm text-muted-foreground">
-                hello@lunaranaturals.com
+                hello@pookley.com
               </p>
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center">
             <p className="text-sm text-muted-foreground">
-              © 2024 Lunara Naturals. All rights reserved.
+              © 2024 Pookley. All rights reserved.
             </p>
           </div>
         </div>

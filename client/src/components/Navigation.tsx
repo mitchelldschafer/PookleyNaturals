@@ -43,7 +43,7 @@ export function Navigation() {
             className="font-serif text-2xl text-foreground hover-elevate active-elevate-2 px-3 py-2 rounded-md transition-colors"
             data-testid="link-home-logo"
           >
-            Lunara Naturals
+            Pookley
           </Link>
 
           {/* Desktop Navigation */}
