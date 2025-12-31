@@ -57,10 +57,10 @@ export default function OurRituals() {
       }
     };
 
-    document.title = "Our Rituals | Pookley – Daily Wellness Practices for Women";
-    setMetaTag('description', "Discover gentle daily rituals to weave Pookley supplements into your morning, midday, and evening routine. Small, loving choices that add up to a life in balance.");
+    document.title = "Our Rituals | Pookley Naturals – Daily Wellness Practices for Women";
+    setMetaTag('description', "Discover gentle daily rituals to weave Pookley Naturals supplements into your morning, midday, and evening routine. Small, loving choices that add up to a life in balance.");
     setMetaTag('keywords', 'daily rituals, wellness routine, self-care habits, morning ritual, evening routine, mindful living');
-    setMetaTag('og:title', 'Our Rituals – Pookley', 'og:title');
+    setMetaTag('og:title', 'Our Rituals – Pookley Naturals', 'og:title');
     setMetaTag('og:description', "Small, loving choices add up to a life in balance. Discover your daily wellness ritual.", 'og:description');
     setMetaTag('og:type', 'website', 'og:type');
     
@@ -405,7 +405,7 @@ export default function OurRituals() {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-serif text-2xl text-foreground mb-3">Pookley</h3>
+              <h3 className="font-serif text-2xl text-foreground mb-3">Pookley Naturals</h3>
               <p className="text-sm text-muted-foreground">
                 Plant-based wellness for the modern woman.
               </p>
@@ -427,13 +427,13 @@ export default function OurRituals() {
             <div>
               <h4 className="font-medium text-foreground mb-3">Connect</h4>
               <p className="text-sm text-muted-foreground">
-                hello@pookley.com
+                hello@pookleynaturals.com
               </p>
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center">
             <p className="text-sm text-muted-foreground">
-              © 2024 Pookley. All rights reserved.
+              © 2024 Pookley Naturals. All rights reserved.
             </p>
           </div>
         </div>

@@ -435,7 +435,7 @@ export default function Home() {
                 className="font-serif text-2xl text-foreground mb-2"
                 data-testid="text-footer-logo"
               >
-                Pookley
+                Pookley Naturals
               </h3>
               <p
                 className="font-sans text-sm text-muted-foreground"
@@ -472,7 +472,7 @@ export default function Home() {
 
           <div className="mt-8 text-center">
             <p className="font-sans text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Pookley. All rights
+              © {new Date().getFullYear()} Pookley Naturals. All rights
               reserved.
             </p>
           </div>

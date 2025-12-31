@@ -117,10 +117,10 @@ export default function Contact() {
       }
     };
 
-    document.title = "Contact Us | Pookley – Get in Touch";
-    setMetaTag('description', "Have questions about our plant-based supplements? Reach out to the Pookley team. We're here to help you on your wellness journey.");
-    setMetaTag('keywords', 'contact pookley, customer support, wellness questions, supplement inquiries');
-    setMetaTag('og:title', 'Contact Us – Pookley', 'og:title');
+    document.title = "Contact Us | Pookley Naturals – Get in Touch";
+    setMetaTag('description', "Have questions about our plant-based supplements? Reach out to the Pookley Naturals team. We're here to help you on your wellness journey.");
+    setMetaTag('keywords', 'contact pookley naturals, customer support, wellness questions, supplement inquiries');
+    setMetaTag('og:title', 'Contact Us – Pookley Naturals', 'og:title');
     setMetaTag('og:description', "Have questions? We're here to help you on your wellness journey.", 'og:description');
     setMetaTag('og:type', 'website', 'og:type');
     
@@ -305,7 +305,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-medium text-foreground mb-1">Email Us</h3>
-                    <p className="text-muted-foreground text-sm">hello@pookley.com</p>
+                    <p className="text-muted-foreground text-sm">hello@pookleynaturals.com</p>
                     <p className="text-muted-foreground text-sm mt-1">We respond within 24-48 hours</p>
                   </div>
                 </div>
@@ -348,7 +348,7 @@ export default function Contact() {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-serif text-2xl text-foreground mb-3">Pookley</h3>
+              <h3 className="font-serif text-2xl text-foreground mb-3">Pookley Naturals</h3>
               <p className="text-sm text-muted-foreground">
                 Plant-based wellness for the modern woman.
               </p>
@@ -373,13 +373,13 @@ export default function Contact() {
             <div>
               <h4 className="font-medium text-foreground mb-3">Connect</h4>
               <p className="text-sm text-muted-foreground">
-                hello@pookley.com
+                hello@pookleynaturals.com
               </p>
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center">
             <p className="text-sm text-muted-foreground">
-              © 2024 Pookley. All rights reserved.
+              © 2024 Pookley Naturals. All rights reserved.
             </p>
           </div>
         </div>
