@@ -305,7 +305,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-medium text-foreground mb-1">Email Us</h3>
-                    <p className="text-muted-foreground text-sm">hello@pookleynaturals.com</p>
+                    <p className="text-muted-foreground text-sm">mitchell.schafer@pookley.com</p>
                     <p className="text-muted-foreground text-sm mt-1">We respond within 24-48 hours</p>
                   </div>
                 </div>
@@ -373,7 +373,7 @@ export default function Contact() {
             <div>
               <h4 className="font-medium text-foreground mb-3">Connect</h4>
               <p className="text-sm text-muted-foreground">
-                hello@pookleynaturals.com
+                mitchell.schafer@pookley.com
               </p>
             </div>
           </div>

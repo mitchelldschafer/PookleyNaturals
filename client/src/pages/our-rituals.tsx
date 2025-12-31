@@ -427,7 +427,7 @@ export default function OurRituals() {
             <div>
               <h4 className="font-medium text-foreground mb-3">Connect</h4>
               <p className="text-sm text-muted-foreground">
-                hello@pookleynaturals.com
+                mitchell.schafer@pookley.com
               </p>
             </div>
           </div>
