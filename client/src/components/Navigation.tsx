@@ -5,17 +5,11 @@ import { useState, useEffect } from "react";
 
 export function Navigation() {
   const [location] = useLocation();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -28,11 +22,7 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-sm shadow-sm border-b border-border"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-background shadow-sm border-b border-border"
       data-testid="nav-main"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
