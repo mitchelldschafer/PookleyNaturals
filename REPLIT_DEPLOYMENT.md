@@ -4,18 +4,20 @@ Your e-commerce infrastructure has been successfully pushed to GitHub! Now you c
 
 ## 🚀 Quick Deployment Steps
 
-### Step 1: Import from GitHub to Replit
+### Step 1: Pull Latest Changes in Replit
 
-1. Go to [Replit](https://replit.com)
-2. Click **Create Repl**
-3. Select **Import from GitHub**
-4. Enter your repository: `https://github.com/mitchelldschafer/PookleyNaturals`
-5. Replit will automatically detect it's a Node.js project
-6. Click **Import from GitHub**
+Since your project was created in Replit and is already connected to GitHub:
+
+1. Go to [Replit](https://replit.com) and open your **PookleyNaturals** Repl
+2. Click the **Version Control** tab (Git icon on left sidebar)
+3. Click **Pull** to get the latest changes from GitHub
+4. Replit will automatically sync all the new e-commerce files!
+
+> **Note:** If you don't see a Version Control tab, your Repl may not be connected to GitHub. In that case, link it by going to the Version Control tab and connecting to `https://github.com/mitchelldschafer/PookleyNaturals`
 
 ### Step 2: Configure Environment Variables in Replit
 
-Once your Repl is created:
+In your existing Repl:
 
 1. Click the **🔒 Secrets** tab (lock icon in left sidebar)
 2. Add each environment variable from your `.env` file:
@@ -95,20 +97,25 @@ After deployment:
 
 ## 🔄 Updating Your Deployment
 
-Whenever you make changes:
+Whenever you make changes locally and push to GitHub:
 
-1. **Commit locally:**
+1. **Commit and push locally:**
    ```bash
    git add .
    git commit -m "Your changes"
    git push origin main
    ```
 
-2. **Sync in Replit:**
+2. **Pull in Replit:**
    - Go to your Repl
    - Click the **Version Control** tab
-   - Click **Pull** to get latest changes
-   - Replit will auto-restart
+   - Click **Pull** button
+   - Replit will automatically:
+     - Download new files
+     - Install new dependencies
+     - Restart the server
+
+That's it! Your live site updates automatically.
 
 ---
 
