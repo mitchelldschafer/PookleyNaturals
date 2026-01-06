@@ -44,6 +44,23 @@ export default function Shop() {
     await addItem(product, 1);
   };
 
+  /* Helper to extract unique categories from products */
+  const categories = [
+    { id: "all", name: "All Products" },
+    ...Array.from(new Set(products.map((p: any) => p.category?._id).filter(Boolean))).map((id) => {
+      const product = products.find((p: any) => p.category?._id === id);
+      return {
+        id: id as string,
+        name: product?.category?.name || "Unknown",
+      };
+    }),
+  ];
+
+  /* Filter products based on selected category */
+  const filteredProducts = selectedCategory === "all"
+    ? products
+    : products.filter((p: any) => p.category?._id === selectedCategory);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
