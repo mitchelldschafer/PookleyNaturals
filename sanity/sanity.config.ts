@@ -4,8 +4,8 @@ import { visionTool } from '@sanity/vision';
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 import { productType, categoryType } from './schemas';
 
-const projectId = process.env.SANITY_PROJECT_ID || '';
-const dataset = process.env.SANITY_DATASET || 'production';
+const projectId = 'wtmqjoaq';
+const dataset = 'production';
 
 export default defineConfig({
     name: 'pookley-naturals',
