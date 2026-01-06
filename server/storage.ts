@@ -119,8 +119,7 @@ export class MemStorage implements IStorage {
         `
         *,
         cart_items (
-          *,
-          products (*)
+          *
         )
       `
       )

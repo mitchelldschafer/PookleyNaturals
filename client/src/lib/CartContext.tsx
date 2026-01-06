@@ -87,34 +87,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             const res = await apiRequest("GET", `/api/carts/${id}`);
             const data = await res.json();
 
-            // Transform DB response to Cart shape
-            // Note: Backend might return raw rows. We need to sum totals.
-            // data.cart_items includes product data IF joined. 
-            // Since Sanity products aren't in Supabase, we might not get product details here easily
-            // unless we enhance the API to fetch them.
-            // For now, let's just store the items.
-
             const items = data.cart_items?.map((item: any) => ({
                 id: item.id,
                 productId: item.product_id,
                 quantity: item.quantity,
-                product: item.product || item.products // Handle potential joins if they eventually work
+                product: item.product || item.products
             })) || [];
-
-            // Calculate totals (frontend side for now if backend doesn't)
-            // Limitation: We need product price to calc total. 
-            // If 'product' is missing, we can't calc subtotal yet.
-            // We'll address this in CartItem component by fetching data? 
-            // Or better: store price in cart_items table (snapshot).
 
             setCart({
                 id: data.id,
                 items,
-                subtotal: 0, // Placeholder
+                subtotal: 0,
                 total: 0
             });
         } catch (error) {
             console.error("Error fetching cart:", error);
+            // If the cart doesn't exist anymore, clear local storage so a new one can be created
+            localStorage.removeItem("cart_id");
+            setCart(null);
         }
     };
 

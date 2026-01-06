@@ -23,11 +23,12 @@ export const supabase = createClient(
 // Cart operations
 export const cartOperations = {
     // Create a new cart
-    createCart: async (userId?: string) => {
+    createCart: async (userId?: string, sessionId?: string) => {
         const { data, error } = await supabase
             .from('carts')
             .insert({
                 user_id: userId,
+                session_id: sessionId,
                 status: 'active',
             })
             .select()
