@@ -1,6 +1,6 @@
-import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type Cart, type CartItem, type Order, type OrderItem, type Product } from "@shared/schema";
-import { randomUUID } from "crypto";
-import { supabase } from "./lib/supabase";
+import { type User, type InsertUser, type EmailSubscription, type InsertEmailSubscription, type Cart, type CartItem, type Order, type OrderItem, users, emailSubscriptions, carts, cartItems, orders, orderItems } from "@shared/schema";
+import { db } from "./db";
+import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -9,274 +9,177 @@ export interface IStorage {
   createEmailSubscription(subscription: InsertEmailSubscription): Promise<EmailSubscription>;
   getEmailSubscriptionByEmail(email: string): Promise<EmailSubscription | undefined>;
 
-  // E-commerce operations
-  getProduct(id: string): Promise<Product | undefined>;
-  getProducts(limit?: number, offset?: number): Promise<Product[]>;
-  getFeaturedProducts(): Promise<Product[]>;
-
-  createCart(userId?: string, sessionId?: string): Promise<Cart>;
+  createCart(userId?: string, sessionId?: string): Promise<any>;
   getCart(cartId: string): Promise<any>;
-  updateCartStatus(cartId: string, status: string): Promise<Cart>;
+  updateCartStatus(cartId: string, status: string): Promise<any>;
 
-  addToCart(cartId: string, productId: string, quantity: number): Promise<CartItem>;
-  updateCartItem(itemId: string, quantity: number): Promise<CartItem | null>;
+  addToCart(cartId: string, productId: string, quantity: number): Promise<any>;
+  updateCartItem(itemId: string, quantity: number): Promise<any>;
   removeCartItem(itemId: string): Promise<void>;
   clearCart(cartId: string): Promise<void>;
 
-  createOrder(orderData: any): Promise<Order>;
-  createOrderItems(orderId: string, cartItems: any[]): Promise<OrderItem[]>;
+  createOrder(orderData: any): Promise<any>;
+  createOrderItems(orderId: string, cartItems: any[]): Promise<any[]>;
   getOrder(orderId: string): Promise<any>;
-  updateOrderStatus(orderId: string, status: string): Promise<Order>;
+  updateOrderStatus(orderId: string, status: string): Promise<any>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private emailSubscriptions: Map<string, EmailSubscription>;
-
-  constructor() {
-    this.users = new Map();
-    this.emailSubscriptions = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
 
   async createEmailSubscription(insertSubscription: InsertEmailSubscription): Promise<EmailSubscription> {
-    const id = randomUUID();
-    const subscription: EmailSubscription = {
-      ...insertSubscription,
-      id,
-      subscribedAt: new Date(),
-    };
-    this.emailSubscriptions.set(subscription.email, subscription);
+    const [subscription] = await db.insert(emailSubscriptions).values(insertSubscription).returning();
     return subscription;
   }
 
   async getEmailSubscriptionByEmail(email: string): Promise<EmailSubscription | undefined> {
-    return this.emailSubscriptions.get(email);
+    const [subscription] = await db.select().from(emailSubscriptions).where(eq(emailSubscriptions.email, email));
+    return subscription;
   }
 
-  // E-commerce operations - Products
-  async getProduct(id: string): Promise<Product | undefined> {
-    const { data } = await supabase
-      .from('products')
-      .select('*')
-      .eq('id', id)
-      .maybeSingle();
-    return data || undefined;
-  }
-
-  async getProducts(limit = 10, offset = 0): Promise<Product[]> {
-    const { data } = await supabase
-      .from('products')
-      .select('*')
-      .range(offset, offset + limit - 1);
-    return data || [];
-  }
-
-  async getFeaturedProducts(): Promise<Product[]> {
-    const { data } = await supabase
-      .from('products')
-      .select('*')
-      .eq('featured', true);
-    return data || [];
-  }
-
-  // E-commerce operations - Carts
-  async createCart(userId?: string, sessionId?: string): Promise<Cart> {
-    const { data, error } = await supabase
-      .from('carts')
-      .insert({
-        user_id: userId,
-        session_id: sessionId,
-        status: 'active',
-      })
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+  async createCart(userId?: string, sessionId?: string): Promise<any> {
+    const [cart] = await db.insert(carts).values({
+      userId: userId || null,
+      sessionId: sessionId || null,
+      status: 'active',
+    }).returning();
+    return cart;
   }
 
   async getCart(cartId: string): Promise<any> {
-    const { data, error } = await supabase
-      .from('carts')
-      .select(
-        `
-        *,
-        cart_items (
-          *
-        )
-      `
-      )
-      .eq('id', cartId)
-      .single();
+    const [cart] = await db.select().from(carts).where(eq(carts.id, cartId));
+    if (!cart) return null;
 
-    if (error) throw error;
-    return data;
+    const items = await db.select().from(cartItems).where(eq(cartItems.cartId, cartId));
+
+    return {
+      ...cart,
+      cart_items: items.map(item => ({
+        id: item.id,
+        cart_id: item.cartId,
+        product_id: item.productId,
+        quantity: item.quantity,
+        created_at: item.createdAt,
+      })),
+    };
   }
 
-  async updateCartStatus(cartId: string, status: string): Promise<Cart> {
-    const { data, error } = await supabase
-      .from('carts')
-      .update({ status })
-      .eq('id', cartId)
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+  async updateCartStatus(cartId: string, status: string): Promise<any> {
+    const [cart] = await db.update(carts)
+      .set({ status, updatedAt: new Date() })
+      .where(eq(carts.id, cartId))
+      .returning();
+    return cart;
   }
 
-  async addToCart(cartId: string, productId: string, quantity: number): Promise<CartItem> {
-    const { data: existingItem } = await supabase
-      .from('cart_items')
-      .select('*')
-      .eq('cart_id', cartId)
-      .eq('product_id', productId)
-      .maybeSingle();
+  async addToCart(cartId: string, productId: string, quantity: number): Promise<any> {
+    const [existingItem] = await db.select().from(cartItems)
+      .where(and(eq(cartItems.cartId, cartId), eq(cartItems.productId, productId)));
 
     if (existingItem) {
-      const { data, error } = await supabase
-        .from('cart_items')
-        .update({ quantity: existingItem.quantity + quantity })
-        .eq('id', existingItem.id)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      const [updated] = await db.update(cartItems)
+        .set({ quantity: existingItem.quantity + quantity })
+        .where(eq(cartItems.id, existingItem.id))
+        .returning();
+      return updated;
     } else {
-      const { data, error } = await supabase
-        .from('cart_items')
-        .insert({
-          cart_id: cartId,
-          product_id: productId,
-          quantity,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      const [item] = await db.insert(cartItems).values({
+        cartId,
+        productId,
+        quantity,
+      }).returning();
+      return item;
     }
   }
 
-  async updateCartItem(itemId: string, quantity: number): Promise<CartItem | null> {
+  async updateCartItem(itemId: string, quantity: number): Promise<any> {
     if (quantity <= 0) {
       await this.removeCartItem(itemId);
       return null;
     }
 
-    const { data, error } = await supabase
-      .from('cart_items')
-      .update({ quantity })
-      .eq('id', itemId)
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+    const [item] = await db.update(cartItems)
+      .set({ quantity })
+      .where(eq(cartItems.id, itemId))
+      .returning();
+    return item;
   }
 
   async removeCartItem(itemId: string): Promise<void> {
-    const { error } = await supabase
-      .from('cart_items')
-      .delete()
-      .eq('id', itemId);
-
-    if (error) throw error;
+    await db.delete(cartItems).where(eq(cartItems.id, itemId));
   }
 
   async clearCart(cartId: string): Promise<void> {
-    const { error } = await supabase
-      .from('cart_items')
-      .delete()
-      .eq('cart_id', cartId);
-
-    if (error) throw error;
+    await db.delete(cartItems).where(eq(cartItems.cartId, cartId));
   }
 
-  // E-commerce operations - Orders
-  async createOrder(orderData: any): Promise<Order> {
-    const orderNumber = `ORD-${Date.now()}`;
-    const { data, error } = await supabase
-      .from('orders')
-      .insert({
-        ...orderData,
-        order_number: orderNumber,
-      })
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+  async createOrder(orderData: any): Promise<any> {
+    const [order] = await db.insert(orders).values({
+      orderNumber: orderData.order_number,
+      cartId: orderData.cart_id,
+      userId: orderData.user_id,
+      customerEmail: orderData.customer_email,
+      customerName: orderData.customer_name,
+      customerPhone: orderData.customer_phone,
+      shippingAddress: JSON.stringify(orderData.shipping_address),
+      billingAddress: orderData.billing_address ? JSON.stringify(orderData.billing_address) : null,
+      subtotal: String(orderData.subtotal),
+      tax: String(orderData.tax || 0),
+      shippingCost: String(orderData.shipping_cost || 0),
+      totalAmount: String(orderData.total_amount),
+      status: orderData.status || 'pending',
+      paymentStatus: orderData.payment_status || 'pending',
+      stripePaymentIntentId: orderData.stripe_payment_intent_id,
+    }).returning();
+    return order;
   }
 
-  async createOrderItems(orderId: string, cartItems: any[]): Promise<OrderItem[]> {
-    const orderItems = cartItems.map((item) => ({
-      order_id: orderId,
-      product_id: item.product_id || item.productId,
-      product_name: item.product_name || 'Unknown Product',
-      product_slug: item.product_slug || 'unknown',
+  async createOrderItems(orderId: string, items: any[]): Promise<any[]> {
+    const insertItems = items.map(item => ({
+      orderId,
+      productId: item.product_id || item.productId,
+      productName: item.product_name || 'Unknown Product',
       quantity: item.quantity,
-      price_at_purchase: item.price_at_purchase || 0,
-      subtotal: item.subtotal || 0,
+      priceAtPurchase: String(item.price_at_purchase || 0),
+      subtotal: String(item.subtotal || 0),
     }));
 
-    const { data, error } = await supabase
-      .from('order_items')
-      .insert(orderItems)
-      .select();
-
-    if (error) throw error;
-    return data || [];
+    const result = await db.insert(orderItems).values(insertItems).returning();
+    return result;
   }
 
   async getOrder(orderId: string): Promise<any> {
-    const { data, error } = await supabase
-      .from('orders')
-      .select(
-        `
-        *,
-        order_items (
-          *,
-          products (*)
-        )
-      `
-      )
-      .eq('id', orderId)
-      .single();
+    const [order] = await db.select().from(orders).where(eq(orders.id, orderId));
+    if (!order) return null;
 
-    if (error) throw error;
-    return data;
+    const items = await db.select().from(orderItems).where(eq(orderItems.orderId, orderId));
+
+    return {
+      ...order,
+      order_items: items,
+    };
   }
 
-  async updateOrderStatus(orderId: string, status: string): Promise<Order> {
-    const { data, error } = await supabase
-      .from('orders')
-      .update({ status })
-      .eq('id', orderId)
-      .select()
-      .single();
-
-    if (error) throw error;
-    return data;
+  async updateOrderStatus(orderId: string, status: string): Promise<any> {
+    const [order] = await db.update(orders)
+      .set({ status })
+      .where(eq(orders.id, orderId))
+      .returning();
+    return order;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

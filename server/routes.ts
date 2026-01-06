@@ -122,42 +122,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Product endpoints - legacy (from Supabase)
-  app.get("/api/products", async (req, res) => {
-    try {
-      const limit = parseInt(req.query.limit as string) || 10;
-      const offset = parseInt(req.query.offset as string) || 0;
-      const products = await storage.getProducts(limit, offset);
-      return res.json(products);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      return res.status(500).json({ error: "Failed to fetch products" });
-    }
-  });
-
-  app.get("/api/products/featured", async (req, res) => {
-    try {
-      const products = await storage.getFeaturedProducts();
-      return res.json(products);
-    } catch (error) {
-      console.error("Error fetching featured products:", error);
-      return res.status(500).json({ error: "Failed to fetch featured products" });
-    }
-  });
-
-  app.get("/api/products/:id", async (req, res) => {
-    try {
-      const product = await storage.getProduct(req.params.id);
-      if (!product) {
-        return res.status(404).json({ error: "Product not found" });
-      }
-      return res.json(product);
-    } catch (error) {
-      console.error("Error fetching product:", error);
-      return res.status(500).json({ error: "Failed to fetch product" });
-    }
-  });
-
   // Cart endpoints
   app.post("/api/carts", async (req, res) => {
     try {
