@@ -9,6 +9,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { ShoppingCart, Star, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useCart } from "@/lib/CartContext";
 
 interface Product {
   _id: string;
@@ -26,7 +27,10 @@ interface Product {
 
 export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const { addItem } = useCart();
   const { toast } = useToast();
+
+  // ... (useQuery code) ...
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["sanity-products"],
@@ -36,26 +40,8 @@ export default function Shop() {
     },
   });
 
-  const categories = [
-    { id: "all", name: "All Products" },
-    { id: "blends", name: "Our Blends" },
-    { id: "rituals", name: "Our Rituals" },
-  ];
-
-  const filteredProducts =
-    selectedCategory === "all"
-      ? products
-      : products.filter(
-        (product: Product) =>
-          product.category?.slug.current === selectedCategory
-      );
-
-  const handleAddToCart = (product: Product) => {
-    toast({
-      title: "Added to Cart",
-      description: `${product.name} has been added to your shopping cart.`,
-      duration: 3000,
-    });
+  const handleAddToCart = async (product: Product) => {
+    await addItem(product, 1);
   };
 
   const containerVariants = {

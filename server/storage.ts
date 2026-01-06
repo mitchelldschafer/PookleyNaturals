@@ -231,12 +231,12 @@ export class MemStorage implements IStorage {
   async createOrderItems(orderId: string, cartItems: any[]): Promise<OrderItem[]> {
     const orderItems = cartItems.map((item) => ({
       order_id: orderId,
-      product_id: item.product_id,
-      product_name: item.products?.name || 'Unknown Product',
-      product_slug: item.products?.slug || 'unknown',
+      product_id: item.product_id || item.productId,
+      product_name: item.product_name || 'Unknown Product',
+      product_slug: item.product_slug || 'unknown',
       quantity: item.quantity,
-      price_at_purchase: item.products?.price || 0,
-      subtotal: (item.products?.price || 0) * item.quantity,
+      price_at_purchase: item.price_at_purchase || 0,
+      subtotal: item.subtotal || 0,
     }));
 
     const { data, error } = await supabase

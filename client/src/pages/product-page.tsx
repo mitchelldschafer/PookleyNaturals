@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRoute } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Navigation } from "@/components/Navigation";
+import { useCart } from "@/lib/CartContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -41,12 +42,13 @@ export default function ProductPage() {
     const { toast } = useToast();
     const [quantity, setQuantity] = useState(1);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
+    const { addItem } = useCart();
+
+    // ... (useQuery code) ...
 
     const { data: product, isLoading, error } = useQuery<Product>({
         queryKey: ["product", slug],
         queryFn: async () => {
-            // Small delay for smooth transition feel
-            // await new Promise(resolve => setTimeout(resolve, 300));
             const res = await apiRequest("GET", `/api/sanity/products/${slug}`);
             return res.json();
         },
@@ -59,12 +61,9 @@ export default function ProductPage() {
         }
     }, [product]);
 
-    const handleAddToCart = () => {
-        toast({
-            title: "Added to Cart",
-            description: `Added ${quantity}x ${product?.name} to your cart.`,
-            duration: 3000,
-        });
+    const handleAddToCart = async () => {
+        if (!product) return;
+        await addItem(product, quantity);
     };
 
     const incrementQty = () => setQuantity(q => q + 1);

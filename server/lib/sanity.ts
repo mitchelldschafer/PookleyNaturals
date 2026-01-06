@@ -92,6 +92,34 @@ export const productQueries = {
     );
   },
 
+  // Get product by ID
+  getProductById: async (id: string) => {
+    return sanityClient.fetch(
+      `
+      *[_type == "product" && _id == $id][0] {
+        _id,
+        name,
+        slug,
+        description,
+        price,
+        salePrice,
+        images,
+        category->{
+          _id,
+          name,
+          slug
+        },
+        ingredients,
+        inStock,
+        featured,
+        "tagline": coalesce(tagline, ""),
+        seo
+      }
+    `,
+      { id }
+    );
+  },
+
   // Get featured products
   getFeaturedProducts: async () => {
     return sanityClient.fetch(`
@@ -137,6 +165,30 @@ export const productQueries = {
     );
   },
 
+  // Get products by IDs
+  getProductsByIds: async (ids: string[]) => {
+    return sanityClient.fetch(
+      `
+      *[_type == "product" && _id in $ids] {
+        _id,
+        name,
+        slug,
+        description,
+        price,
+        salePrice,
+        images,
+        category->{
+          _id,
+          name,
+          slug
+        },
+        inStock
+      }
+    `,
+      { ids }
+    );
+  },
+
   // Get all categories
   getAllCategories: async () => {
     return sanityClient.fetch(`
@@ -149,3 +201,4 @@ export const productQueries = {
     `);
   },
 };
+

@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, uuid, integer, boolean, decimal } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -34,9 +34,64 @@ export const insertEmailSubscriptionSchema = createInsertSchema(emailSubscriptio
 export type InsertEmailSubscription = z.infer<typeof insertEmailSubscriptionSchema>;
 export type EmailSubscription = typeof emailSubscriptions.$inferSelect;
 
+
 // ================================================
-// E-COMMERCE TYPES (for Supabase integration)
+// E-COMMERCE TABLES (Drizzle)
 // ================================================
+
+export const carts = pgTable("carts", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id"),
+  sessionId: text("session_id"),
+  status: text("status").notNull().default('active'),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const cartItems = pgTable("cart_items", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  cartId: uuid("cart_id").references(() => carts.id, { onDelete: 'cascade' }).notNull(),
+  productId: text("product_id").notNull(), // Sanity ID
+  quantity: integer("quantity").notNull().default(1),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const orders = pgTable("orders", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  orderNumber: text("order_number").notNull().unique(),
+  cartId: uuid("cart_id"), // Optional: keep reference
+  userId: text("user_id"),
+  customerEmail: text("customer_email").notNull(),
+  customerName: text("customer_name").notNull(),
+  customerPhone: text("customer_phone"),
+  // Address stored as JSON or individual fields? Let's use JSON for simplicity if supported, or text.
+  // Actually schema.ts defined addressSchema as object. Drizzle jsonb is best.
+  shippingAddress: text("shipping_address").notNull(), // Store as JSON string for now or use jsonb
+  billingAddress: text("billing_address"),
+  subtotal: decimal("subtotal").notNull(),
+  tax: decimal("tax").default('0'),
+  shippingCost: decimal("shipping_cost").default('0'),
+  totalAmount: decimal("total_amount").notNull(),
+  status: text("status").default('pending'),
+  paymentStatus: text("payment_status").default('pending'),
+  stripePaymentIntentId: text("stripe_payment_intent_id"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const orderItems = pgTable("order_items", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  orderId: uuid("order_id").references(() => orders.id, { onDelete: 'cascade' }).notNull(),
+  productId: text("product_id").notNull(),
+  productName: text("product_name").notNull(),
+  quantity: integer("quantity").notNull(),
+  priceAtPurchase: decimal("price_at_purchase").notNull(),
+  subtotal: decimal("subtotal").notNull(),
+});
+
+// ================================================
+// E-COMMERCE TYPES (Zod & Validation)
+// ================================================
+
 
 // Product from Sanity CMS
 export const productSchema = z.object({
@@ -86,7 +141,7 @@ export type Cart = z.infer<typeof cartSchema>;
 export const cartItemSchema = z.object({
   id: z.string().uuid(),
   cart_id: z.string().uuid(),
-  product_id: z.string().uuid(),
+  product_id: z.string(), // Relaxed for Sanity ID
   quantity: z.number().int().positive(),
   created_at: z.string().or(z.date()),
   updated_at: z.string().or(z.date()),
@@ -139,7 +194,7 @@ export type Order = z.infer<typeof orderSchema>;
 export const orderItemSchema = z.object({
   id: z.string().uuid(),
   order_id: z.string().uuid(),
-  product_id: z.string().uuid(),
+  product_id: z.string(),
   product_name: z.string(),
   product_slug: z.string(),
   quantity: z.number().int().positive(),
