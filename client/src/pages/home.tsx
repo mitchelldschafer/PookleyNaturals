@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,7 @@ import testimonial3 from "@assets/generated_images/Testimonial_portrait_three_2d
 type EmailFormValues = z.infer<typeof insertEmailSubscriptionSchema>;
 
 export default function Home() {
+  const [, navigate] = useLocation();
   const [scrollY, setScrollY] = useState(0);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { toast } = useToast();
@@ -132,6 +134,7 @@ export default function Home() {
               variant="outline"
               className="bg-white/90 backdrop-blur-sm border-white/20 font-sans"
               data-testid="button-shop-now"
+              onClick={() => navigate("/shop")}
             >
               Shop Now
             </Button>

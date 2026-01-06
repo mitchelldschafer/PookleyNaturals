@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertEmailSubscriptionSchema, addToCartSchema, updateCartItemSchema, checkoutRequestSchema } from "@shared/schema";
 import { z } from "zod";
+import { productQueries, urlFor } from "./lib/sanity";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Email subscription endpoint
@@ -46,7 +47,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Product endpoints
+  // Product endpoints - from Sanity
+  app.get("/api/sanity/products", async (req, res) => {
+    try {
+      const products = await productQueries.getAllProducts();
+      const enrichedProducts = products.map((product: any) => ({
+        ...product,
+        images: product.images?.map((img: any) => ({
+          ...img,
+          url: urlFor(img).url()
+        })) || []
+      }));
+      return res.json(enrichedProducts);
+    } catch (error) {
+      console.error("Error fetching Sanity products:", error);
+      return res.status(500).json({ error: "Failed to fetch products" });
+    }
+  });
+
+  app.get("/api/sanity/products/featured", async (req, res) => {
+    try {
+      const products = await productQueries.getFeaturedProducts();
+      const enrichedProducts = products.map((product: any) => ({
+        ...product,
+        images: product.images?.map((img: any) => ({
+          ...img,
+          url: urlFor(img).url()
+        })) || []
+      }));
+      return res.json(enrichedProducts);
+    } catch (error) {
+      console.error("Error fetching featured Sanity products:", error);
+      return res.status(500).json({ error: "Failed to fetch featured products" });
+    }
+  });
+
+  app.get("/api/sanity/products/:slug", async (req, res) => {
+    try {
+      const product = await productQueries.getProductBySlug(req.params.slug);
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+      const enrichedProduct = {
+        ...product,
+        images: product.images?.map((img: any) => ({
+          ...img,
+          url: urlFor(img).url()
+        })) || []
+      };
+      return res.json(enrichedProduct);
+    } catch (error) {
+      console.error("Error fetching Sanity product:", error);
+      return res.status(500).json({ error: "Failed to fetch product" });
+    }
+  });
+
+  // Product endpoints - legacy (from Supabase)
   app.get("/api/products", async (req, res) => {
     try {
       const limit = parseInt(req.query.limit as string) || 10;

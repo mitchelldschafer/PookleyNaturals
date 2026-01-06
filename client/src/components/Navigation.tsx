@@ -13,6 +13,7 @@ export function Navigation() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/shop", label: "Shop" },
     { href: "/our-blends", label: "Our Blends" },
     { href: "/our-rituals", label: "Our Rituals" },
     { href: "/ingredients", label: "Ingredients" },
