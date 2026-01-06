@@ -52,26 +52,34 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             let id = getCartId();
             if (!id) {
                 // Create new cart
-                const res = await apiRequest("POST", "/api/carts", {
-                    sessionId: Math.random().toString(36).substring(7),
-                });
-                const newCart = await res.json();
-                id = newCart.id;
-                setCartId(id);
+                id = await createNewCart();
             }
 
             if (id) {
                 await fetchCart(id);
-            } else {
-                localStorage.removeItem("cart_id");
             }
         } catch (error) {
             console.error("Failed to initialize cart:", error);
             // If fetch fails (maybe invalid ID), clear and create new
             localStorage.removeItem("cart_id");
+            try {
+                const newId = await createNewCart();
+                await fetchCart(newId);
+            } catch (e) {
+                console.error("Critical: Failed to recover cart", e);
+            }
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const createNewCart = async () => {
+        const res = await apiRequest("POST", "/api/carts", {
+            sessionId: Math.random().toString(36).substring(7),
+        });
+        const newCart = await res.json();
+        setCartId(newCart.id);
+        return newCart.id;
     };
 
     const fetchCart = async (id: string) => {
