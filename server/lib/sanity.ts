@@ -2,33 +2,33 @@ import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
 if (!process.env.SANITY_PROJECT_ID) {
-    throw new Error('Missing SANITY_PROJECT_ID environment variable');
+  throw new Error('Missing SANITY_PROJECT_ID environment variable');
 }
 
 if (!process.env.SANITY_DATASET) {
-    throw new Error('Missing SANITY_DATASET environment variable');
+  throw new Error('Missing SANITY_DATASET environment variable');
 }
 
 export const sanityClient = createClient({
-    projectId: process.env.SANITY_PROJECT_ID,
-    dataset: process.env.SANITY_DATASET,
-    apiVersion: process.env.SANITY_API_VERSION || '2024-01-01',
-    token: process.env.SANITY_API_TOKEN,
-    useCdn: process.env.NODE_ENV === 'production',
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET,
+  apiVersion: process.env.SANITY_API_VERSION || '2024-01-01',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: process.env.NODE_ENV === 'production',
 });
 
 // Image URL builder for transforming Sanity images
 const builder = imageUrlBuilder(sanityClient);
 
 export function urlFor(source: any) {
-    return builder.image(source);
+  return builder.image(source);
 }
 
 // Product queries
 export const productQueries = {
-    // Get all products
-    getAllProducts: async () => {
-        return sanityClient.fetch(`
+  // Get all products
+  getAllProducts: async () => {
+    return sanityClient.fetch(`
       *[_type == "product" && !(_id in path("drafts.**"))] | order(orderRank) {
         _id,
         name,
@@ -36,7 +36,8 @@ export const productQueries = {
         description,
         price,
         salePrice,
-        images,
+        "images": images[].asset->url,
+        "imageUrl": images[0].asset->url,
         category->{
           _id,
           name,
@@ -49,12 +50,12 @@ export const productQueries = {
         seo
       }
     `);
-    },
+  },
 
-    // Get product by slug
-    getProductBySlug: async (slug: string) => {
-        return sanityClient.fetch(
-            `
+  // Get product by slug
+  getProductBySlug: async (slug: string) => {
+    return sanityClient.fetch(
+      `
       *[_type == "product" && slug.current == $slug][0] {
         _id,
         name,
@@ -83,13 +84,13 @@ export const productQueries = {
         }
       }
     `,
-            { slug }
-        );
-    },
+      { slug }
+    );
+  },
 
-    // Get featured products
-    getFeaturedProducts: async () => {
-        return sanityClient.fetch(`
+  // Get featured products
+  getFeaturedProducts: async () => {
+    return sanityClient.fetch(`
       *[_type == "product" && featured == true && !(_id in path("drafts.**"))] | order(orderRank) {
         _id,
         name,
@@ -106,12 +107,12 @@ export const productQueries = {
         "tagline": coalesce(tagline, "")
       }
     `);
-    },
+  },
 
-    // Get products by category
-    getProductsByCategory: async (categorySlug: string) => {
-        return sanityClient.fetch(
-            `
+  // Get products by category
+  getProductsByCategory: async (categorySlug: string) => {
+    return sanityClient.fetch(
+      `
       *[_type == "product" && category->slug.current == $categorySlug && !(_id in path("drafts.**"))] | order(orderRank) {
         _id,
         name,
@@ -128,13 +129,13 @@ export const productQueries = {
         "tagline": coalesce(tagline, "")
       }
     `,
-            { categorySlug }
-        );
-    },
+      { categorySlug }
+    );
+  },
 
-    // Get all categories
-    getAllCategories: async () => {
-        return sanityClient.fetch(`
+  // Get all categories
+  getAllCategories: async () => {
+    return sanityClient.fetch(`
       *[_type == "category" && !(_id in path("drafts.**"))] | order(orderRank) {
         _id,
         name,
@@ -142,5 +143,5 @@ export const productQueries = {
         description
       }
     `);
-    },
+  },
 };

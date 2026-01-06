@@ -165,8 +165,8 @@ async function main() {
             console.log('   To start fresh, delete existing products in Sanity Studio first.\n');
         }
 
-        // Image paths (adjust if needed)
-        const imageDir = join(__dirname, '..', '..', '.gemini', 'antigravity', 'brain', '42cc28ce-63c7-4b54-bbe5-26fa4c01648e');
+        // Image paths (correct absolute path)
+        const imageDir = '/Users/mitchellschafer/.gemini/antigravity/brain/42cc28ce-63c7-4b54-bbe5-26fa4c01648e';
         const imagePaths = [
             join(imageDir, 'magnesium_bottle_1767603597708.png'),
             join(imageDir, 'zinc_bottle_1767603612443.png'),

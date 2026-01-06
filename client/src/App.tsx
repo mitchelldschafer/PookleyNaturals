@@ -9,6 +9,7 @@ import OurBlends from "@/pages/our-blends";
 import OurRituals from "@/pages/our-rituals";
 import Ingredients from "@/pages/ingredients";
 import About from "@/pages/about";
+import Shop from "@/pages/shop";
 import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
 

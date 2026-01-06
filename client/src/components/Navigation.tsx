@@ -43,23 +43,24 @@ export function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-sans text-sm transition-colors hover-elevate active-elevate-2 px-3 py-2 rounded-md ${
-                  location === link.href
+                className={`font-sans text-sm transition-colors hover-elevate active-elevate-2 px-3 py-2 rounded-md ${location === link.href
                     ? "text-primary font-medium"
                     : "text-muted-foreground"
-                }`}
+                  }`}
                 data-testid={`link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 {link.label}
               </Link>
             ))}
-            <Button
-              size="default"
-              className="font-sans"
-              data-testid="button-shop-now"
-            >
-              Shop Now
-            </Button>
+            <Link href="/shop">
+              <Button
+                size="default"
+                className="font-sans"
+                data-testid="button-shop-now"
+              >
+                Shop Now
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,24 +89,25 @@ export function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-sans text-sm block px-4 py-2 rounded-md hover-elevate active-elevate-2 transition-colors ${
-                    location === link.href
+                  className={`font-sans text-sm block px-4 py-2 rounded-md hover-elevate active-elevate-2 transition-colors ${location === link.href
                       ? "text-primary font-medium bg-primary/5"
                       : "text-muted-foreground"
-                  }`}
+                    }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid={`link-mobile-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Button
-                size="default"
-                className="font-sans w-full"
-                data-testid="button-mobile-shop-now"
-              >
-                Shop Now
-              </Button>
+              <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button
+                  size="default"
+                  className="font-sans w-full"
+                  data-testid="button-mobile-shop-now"
+                >
+                  Shop Now
+                </Button>
+              </Link>
             </div>
           </div>
         )}
