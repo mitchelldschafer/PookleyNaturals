@@ -17,6 +17,8 @@ export const sanityClient = createClient({
   useCdn: process.env.NODE_ENV === 'production',
 });
 
+console.log(`Sanity Client initialized. Project: ${process.env.SANITY_PROJECT_ID}, Dataset: ${process.env.SANITY_DATASET}, CDN: ${process.env.NODE_ENV === 'production'}`);
+
 // Image URL builder for transforming Sanity images
 const builder = imageUrlBuilder(sanityClient);
 
@@ -28,7 +30,7 @@ export function urlFor(source: any) {
 export const productQueries = {
   // Get all products
   getAllProducts: async () => {
-    return sanityClient.fetch(`
+    const products = await sanityClient.fetch(`
       *[_type == "product" && !(_id in path("drafts.**"))] | order(orderRank) {
         _id,
         name,
@@ -50,6 +52,8 @@ export const productQueries = {
         seo
       }
     `);
+    console.log(`Fetched ${products?.length || 0} products from Sanity`);
+    return products;
   },
 
   // Get product by slug
