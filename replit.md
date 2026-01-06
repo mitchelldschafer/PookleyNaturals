@@ -1,8 +1,8 @@
-# Lunara Naturals Landing Page
+# Pookley Naturals Landing Page
 
 ## Overview
 
-Lunara Naturals is a wellness-focused web application for a women's plant-based supplement brand. The application features a zen, nature-inspired aesthetic with a home page, product showcase, and ritual guide. Built as a full-stack TypeScript application with React frontend and Express backend, it emphasizes mobile-first responsive design with calming, natural tones inspired by brands like Aesop, Ritual, and Moon Juice.
+Pookley Naturals is a wellness-focused web application for a women's plant-based supplement brand. The application features a zen, nature-inspired aesthetic with a home page, product showcase, and ritual guide. Built as a full-stack TypeScript application with React frontend and Express backend, it emphasizes mobile-first responsive design with calming, natural tones inspired by brands like Aesop, Ritual, and Moon Juice.
 
 **Current Pages**:
 - **Home** (`/`): Landing page with hero section, about, product highlights, testimonials, email signup, and footer

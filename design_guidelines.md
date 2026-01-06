@@ -1,4 +1,4 @@
-# Lunara Naturals Landing Page - Design Guidelines
+# Pookley Naturals Landing Page - Design Guidelines
 
 ## Design Approach
 **Reference-Based**: Inspired by Aesop, Ritual, and Moon Juice aesthetics - zen, nurturing, rooted in nature with morning ritual inspiration, soft light, and balance.
