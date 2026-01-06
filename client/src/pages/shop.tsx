@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +32,7 @@ export default function Shop() {
     queryKey: ["sanity-products"],
     queryFn: async () => {
       const response = await apiRequest("GET", "/api/sanity/products");
-      return response;
+      return response.json();
     },
   });
 
@@ -45,9 +46,9 @@ export default function Shop() {
     selectedCategory === "all"
       ? products
       : products.filter(
-          (product: Product) =>
-            product.category?.slug.current === selectedCategory
-        );
+        (product: Product) =>
+          product.category?.slug.current === selectedCategory
+      );
 
   const handleAddToCart = (product: Product) => {
     toast({
@@ -145,36 +146,38 @@ export default function Shop() {
                   >
                     <Card className="h-full overflow-hidden border-neutral-200 hover:shadow-xl transition-all duration-300">
                       {/* Image Container */}
-                      <div className="relative overflow-hidden bg-neutral-100 aspect-square">
-                        {!product.inStock && (
-                          <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
-                            <span className="text-white text-lg font-semibold">
-                              Out of Stock
-                            </span>
-                          </div>
-                        )}
+                      <Link href={`/product/${product.slug.current}`}>
+                        <div className="relative overflow-hidden bg-neutral-100 aspect-square cursor-pointer group-hover:opacity-90 transition-opacity">
+                          {!product.inStock && (
+                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+                              <span className="text-white text-lg font-semibold">
+                                Out of Stock
+                              </span>
+                            </div>
+                          )}
 
-                        {product.images?.[0]?.url && (
-                          <img
-                            src={product.images[0].url}
-                            alt={product.images[0].alt || product.name}
-                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                          />
-                        )}
+                          {product.images?.[0]?.url && (
+                            <img
+                              src={product.images[0].url}
+                              alt={product.images[0].alt || product.name}
+                              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                            />
+                          )}
 
-                        {hasDiscount && (
-                          <Badge className="absolute top-4 right-4 bg-red-500 hover:bg-red-600">
-                            Sale
-                          </Badge>
-                        )}
+                          {hasDiscount && (
+                            <Badge className="absolute top-4 right-4 bg-red-500 hover:bg-red-600">
+                              Sale
+                            </Badge>
+                          )}
 
-                        {product.featured && !hasDiscount && (
-                          <Badge className="absolute top-4 right-4 bg-amber-500 hover:bg-amber-600 flex items-center gap-1">
-                            <Star className="w-3 h-3" />
-                            Featured
-                          </Badge>
-                        )}
-                      </div>
+                          {product.featured && !hasDiscount && (
+                            <Badge className="absolute top-4 right-4 bg-amber-500 hover:bg-amber-600 flex items-center gap-1">
+                              <Star className="w-3 h-3" />
+                              Featured
+                            </Badge>
+                          )}
+                        </div>
+                      </Link>
 
                       <CardContent className="pt-6 pb-3">
                         {product.category && (
@@ -183,9 +186,11 @@ export default function Shop() {
                           </p>
                         )}
 
-                        <h3 className="font-serif text-xl text-foreground mb-2 leading-tight line-clamp-2">
-                          {product.name}
-                        </h3>
+                        <Link href={`/product/${product.slug.current}`}>
+                          <h3 className="font-serif text-xl text-foreground mb-2 leading-tight line-clamp-2 cursor-pointer hover:text-primary transition-colors">
+                            {product.name}
+                          </h3>
+                        </Link>
 
                         {product.tagline && (
                           <p className="text-sm text-neutral-600 mb-3 line-clamp-2">
